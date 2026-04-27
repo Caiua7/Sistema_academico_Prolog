@@ -129,4 +129,4 @@ falta(RA, CC, Nomes) :-
 
 %QUESTAO 3
 
-%COMEÇAR QUESTAO 3
+%COMEÇAR QUESTAO 3 testando
