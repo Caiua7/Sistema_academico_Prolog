@@ -60,18 +60,22 @@ historico(666,[item(1,1,2020,7.0,0.80),
 
 %%FUNÇÕES DO ZERO
 
+% ver se elemento pertence a lista
 pertence(X, [X|_]).
 pertence(X, [_|R]) :-
     pertence(X, R).
 
-% interseção
-% fazer a intersecao
+% diferença entre listas
+diferenca([], _, []).
+diferenca([P|R], L2, NR) :-
+    pertence(P, L2),
+    diferenca(R, L2, NR).
+diferenca([P|R], L2, [P|NR]) :-
+    \+ pertence(P, L2),
+    diferenca(R, L2, NR).
 
-% diferença 
-% fazer a diferença (qual matéria não fez)
 
-
-% subset
+% contido (lista 1 esta na lista 2)
 contido([], _).
 contido([P|R], L2) :-
     pertence(P, L2),
@@ -79,7 +83,7 @@ contido([P|R], L2) :-
 
 
 
-%REGRAS 
+%REGRAS
 
 aprovado(item(_,_,_,Nota,Freq)) :-
     Nota >= 5.0,
@@ -98,7 +102,16 @@ aprovadas_lista([item(_,_,_,Nota,Freq)|R], N) :-
     (Nota < 5.0 ; Freq < 0.75),
     aprovadas_lista(R, N).
 
+
+% NOMES DAS MATÉRIAS
+
+nomes_materias([], []).
+nomes_materias([P|R], [Nome|NR]) :-
+    materia(P, Nome, _),
+    nomes_materias(R, NR).
+
 %QUESTÃO 1
+
 concluiu(RA, CC) :-
     curriculo(CC, Materias),
     materias_aprovadas(RA, Aprovadas),
@@ -107,10 +120,13 @@ concluiu(RA, CC) :-
 %FAZER ALUNO QUE COMPLETOU UM CURSO MAS AINDA NÃO O SEGUNDO
 
 %QUESTÃO 2
+
 falta(RA, CC, Nomes) :-
     curriculo(CC, Materias),
     materias_aprovadas(RA, Aprovadas),
     diferenca(Materias, Aprovadas, CodFaltam),
     nomes_materias(CodFaltam, Nomes).
 
-%CONTINUAR QUESTAO 2
+%QUESTAO 3
+
+%COMEÇAR QUESTAO 3
