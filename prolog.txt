@@ -1,0 +1,116 @@
+%BANCO DE DADOS
+
+curso(1,informatica).
+curso(2,eletro_eletronica).
+
+materia(1,técnicas_de_programacao,8).
+materia(2,programação_orientada_a_objetos,5).
+materia(3,estruturas_de_dados,4).
+materia(4,topicos_em_metodologias_de_programacao,3).
+materia(5,circuitos_eletricos,4).
+materia(6,eletronica_digital,5).
+materia(7,arquitetura_computadores,6).
+materia(8,microcontroladores,4).
+
+curriculo(1,[1,2,3,4]).
+currículo(2,[5,6,7,8]).
+
+aluno(12808,jose).
+aluno(12080,marcos).
+aluno(12909,joao).
+aluno(12090,ana).
+
+%EXTRA
+aluno(666,maligno).
+
+
+
+cursa(12909,1).
+cursa(12080,2).
+cursa(12090,2).
+
+%EXTRA
+cursa(666,1).
+
+
+
+historico(12808,[item(1,1,2012,3.0,0.77),
+                  item(1,2,2013,6.5,0.90),
+                  item(5,1,2014,8.0,0.80)]).
+
+historico(12909,[item(1,1,2012,7.0,0.80),
+                  item(2,2,2013,8.5,0.80),
+                  item(3,1,2014,5.0,0.75)]).
+
+historico(12080,[item(5,1,2012,6.0,0.70),
+                  item(5,2,2013,7.5,0.90),
+                  item(6,1,2014,5.0,0.90)]).
+
+historico(12090,[item(7,1,2012,6.0,0.75),
+                  item(8,2,2014,8.0,0.89)]).
+
+
+%EXTRA
+historico(666,[item(1,1,2020,7.0,0.80),
+                 item(2,1,2020,7.0,0.80),
+                 item(3,1,2020,7.0,0.80),
+                 item(4,1,2020,7.0,0.80)]).
+
+
+
+%%FUNÇÕES DO ZERO
+
+pertence(X, [X|_]).
+pertence(X, [_|R]) :-
+    pertence(X, R).
+
+% interseção
+% fazer a intersecao
+
+% diferença 
+% fazer a diferença (qual matéria não fez)
+
+
+% subset
+contido([], _).
+contido([P|R], L2) :-
+    pertence(P, L2),
+    contido(R, L2).
+
+
+
+%REGRAS 
+
+aprovado(item(_,_,_,Nota,Freq)) :-
+    Nota >= 5.0,
+    Freq >= 0.75.
+
+materias_aprovadas(RA, ListaAprovadas) :-
+    historico(RA, Lista),
+    aprovadas_lista(Lista, ListaAprovadas).
+
+aprovadas_lista([], []).
+aprovadas_lista([item(CM,_,_,Nota,Freq)|R], [CM|N]) :-
+    Nota >= 5.0,
+    Freq >= 0.75,
+    aprovadas_lista(R, N).
+aprovadas_lista([item(_,_,_,Nota,Freq)|R], N) :-
+    (Nota < 5.0 ; Freq < 0.75),
+    aprovadas_lista(R, N).
+
+%QUESTÃO 1
+concluiu(RA, CC) :-
+    curriculo(CC, Materias),
+    materias_aprovadas(RA, Aprovadas),
+    contido(Materias, Aprovadas).
+
+%FAZER ALUNO QUE COMPLETOU UM CURSO MAS AINDA NÃO O SEGUNDO
+
+%QUESTÃO 2
+falta(RA, CC, Nomes) :-
+    curriculo(CC, Materias),
+    materias_aprovadas(RA, Aprovadas),
+    diferenca(Materias, Aprovadas, CodFaltam),
+    nomes_materias(CodFaltam, Nomes).
+
+%CONTINUAR QUESTAO 2
