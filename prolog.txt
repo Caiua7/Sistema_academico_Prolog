@@ -82,6 +82,22 @@ contido([P|R], L2) :-
     contido(R, L2).
 
 
+% tamanho da lista
+tamanho([], 0).
+tamanho([_|R], N) :-
+    tamanho(R, N1),
+    N is N1 + 1.
+
+% interseção
+intersecao([], _, []).
+intersecao([P|R], L2, [P|NR]) :-
+    pertence(P, L2),
+    intersecao(R, L2, NR).
+intersecao([P|R], L2, NR) :-
+    \+ pertence(P, L2),
+    intersecao(R, L2, NR).
+
+
 
 %REGRAS
 
@@ -130,3 +146,15 @@ falta(RA, CC, Nomes) :-
 %QUESTAO 3
 
 %COMEÇAR QUESTAO 3 testando
+
+
+%QUESTÃO 4
+
+
+jafoi(CC, RA, Percentual) :-
+    curriculo(CC, Materias),
+    materias_aprovadas(RA, Aprovadas),
+    intersecao(Materias, Aprovadas, Feitas),
+    tamanho(Materias, Total),
+    tamanho(Feitas, Qtde),
+    Percentual is (Qtde / Total) * 100.
