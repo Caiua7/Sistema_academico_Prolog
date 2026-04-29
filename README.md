@@ -12,7 +12,9 @@ Dia a dia:
 
 28/04 - 17h -> Mateus termina a parte 3. 
 
-29/04 - 13h -> Ajustes finais e melhorias no código
+29/04 - 12h -> Ajustes finais e melhorias no código.
+
+29/04 - 14h -> Trabalho finalizado.
 
 Dificuldades e Soluções: 
 
