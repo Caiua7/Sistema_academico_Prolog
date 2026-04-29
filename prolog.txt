@@ -143,11 +143,14 @@ nomes_materias([P|R], [Nome|NR]) :-
 %QUESTÃO 1
 
 concluiu(RA, CC) :-
+    aluno(RA, _), %garante que o aluno existe
+    curso(CC, _), %garante que o curso existe
     cursa(RA, CC),
+    historico(RA, _), %garante que o aluno tem histórico
     curriculo(CC, Materias),
+    Materias \= [], %evita currículo vazio
     materias_aprovadas(RA, Aprovadas),
     contido(Materias, Aprovadas).
-
 
 %QUESTÃO 2
 
