@@ -12,6 +12,8 @@ Dia a dia:
 
 28/04 - 17h -> Mateus termina a parte 3. 
 
+29/04 - 13h -> Ajustes finais e melhorias no código
+
 Dificuldades e Soluções: 
 
 Questão 1 não houve dificuldades maiores, pois, a função já havia feita em aula diversas vezes, as poucas dúvidas que apareceram já tiramos diretamente na aula pratica com o professor.  
