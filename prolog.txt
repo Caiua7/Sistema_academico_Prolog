@@ -155,7 +155,12 @@ concluiu(RA, CC) :-
 %QUESTÃO 2
 
 falta(RA, CC, Nomes) :-
+    aluno(RA, _),
+    curso(CC, _),
+    cursa(RA, CC),
+    historico(RA, _),
     curriculo(CC, Materias),
+    Materias \= [],
     materias_aprovadas(RA, Aprovadas),
     diferenca(Materias, Aprovadas, CodFaltam),
     nomes_materias(CodFaltam, Nomes).
@@ -163,16 +168,24 @@ falta(RA, CC, Nomes) :-
 %QUESTAO 3
 
 extra(RA, CC, Nomes) :-
+    aluno(RA, _),
+    curso(CC, _),
+    cursa(RA, CC),
+    historico(RA, _),
     curriculo(CC, Materias),
+    Materias \= [],
     materias_aprovadas(RA, Aprovadas),
     diferenca(Aprovadas, Materias, CodExtras),
     nomes_materias(CodExtras, Nomes).
-
 
 %QUESTÃO 4
 
 
 jafoi(CC, RA, Percentual) :-
+    aluno(RA, _),
+    curso(CC, _),
+    cursa(RA, CC),
+    historico(RA, _),
     curriculo(CC, Materias),
     tamanho(Materias, Total),
     Total > 0,
