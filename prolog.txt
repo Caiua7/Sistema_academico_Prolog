@@ -3,8 +3,12 @@
 curso(1,informatica).
 curso(2,eletro_eletronica).
 
-materia(1,técnicas_de_programacao,8).
-materia(2,programação_orientada_a_objetos,5).
+%EXTRA
+
+curso(3,poo).
+
+materia(1,tecnicas_de_programacao,8).
+materia(2,programacao_orientada_a_objetos,5).
 materia(3,estruturas_de_dados,4).
 materia(4,topicos_em_metodologias_de_programacao,3).
 materia(5,circuitos_eletricos,4).
@@ -13,7 +17,10 @@ materia(7,arquitetura_computadores,6).
 materia(8,microcontroladores,4).
 
 curriculo(1,[1,2,3,4]).
-currículo(2,[5,6,7,8]).
+curriculo(2,[5,6,7,8]).
+
+%EXTRA
+curriculo(3,[9,10,11,12]).
 
 aluno(12808,jose).
 aluno(12080,marcos).
@@ -33,6 +40,7 @@ cursa(12090,2).
 %EXTRA
 cursa(666,1).
 cursa(09090909,1).
+cursa(666,3).
 
 
 
@@ -135,11 +143,11 @@ nomes_materias([P|R], [Nome|NR]) :-
 %QUESTÃO 1
 
 concluiu(RA, CC) :-
+    cursa(RA, CC),
     curriculo(CC, Materias),
     materias_aprovadas(RA, Aprovadas),
     contido(Materias, Aprovadas).
 
-%FAZER ALUNO QUE COMPLETOU UM CURSO MAS AINDA NÃO O SEGUNDO
 
 %QUESTÃO 2
 
@@ -163,8 +171,9 @@ extra(RA, CC, Nomes) :-
 
 jafoi(CC, RA, Percentual) :-
     curriculo(CC, Materias),
-    materias_aprovadas(RA, Aprovadas),
-    intersecao(Materias, Aprovadas, Feitas),
     tamanho(Materias, Total),
+    Total > 0,
+    materias_aprovadas(RA, Aprovadas),
+    intersecao(Materias, Aprovadas, Feitas), %cruza materias aprovadas e feitas
     tamanho(Feitas, Qtde),
     Percentual is (Qtde / Total) * 100.
